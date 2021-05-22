@@ -1,5 +1,5 @@
 {
-	"name": "tani-medi-portfolio-app",
+	"name": "tani-medi-portfolio",
 	"version": "0.0.1",
 	"description": "tani medi FCC Backend Challenge",
 	"main": "server.js",
