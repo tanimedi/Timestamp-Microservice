@@ -34,28 +34,37 @@ console.log({greeting: "hello world"});
 res.json({greeting: "hello world"});
 });
 
-app.get("/api/:datetime", function(req, res) {
-  let timestamp = req.params.datetime;
-  if (timestamp.match(/\d{5,}/)) {
-timestamp = parseInt(timestamp);
-  }
-  let date = new Date(timestamp);
-  if(date == "Invalid Date") {
-    res.json({"error": "Invalid Date"})
-  } else {
-  res.json({ "unix": date.valueOf(), "utc": date.toUTCString() });
-  }
-});
-
 app.get("/api/", function(req, res) {
   let date = new Date();
   res.json({ "unix": date.valueOf(), "utc": date.toUTCString() });
 })
 
+app.get("/api/:datetime", function(req, res) {
+  let timestamp = req.params.datetime;
+  if ((/\d{5,}/.test(timestamp))) {
+
+  let unixTime = new Date(parseInt(timestamp));
+  res.json({ "unix": unixTime.getTime(), "utc": unixTime.toUTCString()
+});
+} else {
+if ((/^[a-zA-Z]+$/.test(timestamp))) {
+let date = new Date(timestamp);
+  if(date == "Invalid Date") {
+    res.json({"error": "Invalid Date"})
+  }
+  } else {
+    let date = new Date(timestamp);
+  res.json({ "unix": date.getTime(), "utc": date.toUTCString() });
+  }
+}
+});
+
+
+
 app.get("/api/whoami", function(req, res) {
   res.json({
-    value: "value here"
-  })
+    "value": "value here"
+  });
 });
 
 
