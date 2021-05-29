@@ -34,6 +34,12 @@ console.log({greeting: "hello world"});
 res.json({greeting: "hello world"});
 });
 
+app.get("/api/whoami", function(req, res) {
+  res.json({
+    "value": "value here"
+  });
+});
+
 app.get("/api/", function(req, res) {
   let date = new Date();
   res.json({ "unix": date.valueOf(), "utc": date.toUTCString() });
@@ -47,13 +53,10 @@ app.get("/api/:datetime", function(req, res) {
   res.json({ "unix": unixTime.getTime(), "utc": unixTime.toUTCString()
 });
 } else {
-if ((/^[a-zA-Z]+$/.test(timestamp))) {
 let date = new Date(timestamp);
   if(date == "Invalid Date") {
     res.json({"error": "Invalid Date"})
-  }
   } else {
-    let date = new Date(timestamp);
   res.json({ "unix": date.getTime(), "utc": date.toUTCString() });
   }
 }
@@ -61,11 +64,7 @@ let date = new Date(timestamp);
 
 
 
-app.get("/api/whoami", function(req, res) {
-  res.json({
-    "value": "value here"
-  });
-});
+
 
 
 // listen for requests :)
