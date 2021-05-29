@@ -40,8 +40,8 @@ app.get("/api/:datetime", function(req, res) {
 timestamp = parseInt(timestamp);
   }
   let date = new Date(timestamp);
-  if(date.toUTCString() == "Invalid Date") {
-    res.json({error: "Invalid Date"})
+  if(date() == "Invalid Date") {
+    res.json({"error": "Invalid Date"})
   } else {
   res.json({ unix: date.valueOf(), utc: date.toUTCString() });
   }
@@ -51,6 +51,12 @@ app.get("/api/", function(req, res) {
   let date = new Date();
   res.json({ unix: date.valueOf(), utc: date.toUTCString() });
 })
+
+app.get("/api/whoami", function(req, res) {
+  res.json({
+    value: "value here"
+  })
+});
 
 
 // listen for requests :)
