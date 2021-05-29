@@ -36,7 +36,9 @@ res.json({greeting: "hello world"});
 
 app.get("/api/whoami", function(req, res) {
   res.json({
-    "value": "value here"
+    "ipaddress": req.connection.remoteAddress.ip,
+    "language": req.headers["accept-language"],
+    "software": req.headers["user-agent"]
   });
 });
 
